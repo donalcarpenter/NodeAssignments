@@ -30,15 +30,18 @@ http.createServer(function(req, res){
 						}
 
 						totalBytesWritten += written;
-						writeOutRequestBody(chunk);
 
-						var result = 'success, ' + totalBytesWritten + ' written to ' + filepath;
-						console.log(result);
-						
-						finalize(res, 200, result);
+						console.log(totalBytesWritten + ' written to ' + filepath);
+
+						writeOutRequestBody(chunk);
 					});
+				}else{
+					var result = 'success, ' + totalBytesWritten + ' written to ' + filepath;
+					console.log(result);
+						
+					finalize(res, 200, result);
 				}
-				
+
 			})();
 		});
 	});
