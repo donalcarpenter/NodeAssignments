@@ -10,6 +10,7 @@ var finalize = function (res, status, content){
 http.createServer(function(req, res){
 	var filepath = '.' + req.url;
 
+
 	fs.open(filepath, 'a+', function(err, fd){
 
 		if(err){

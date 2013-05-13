@@ -13,6 +13,25 @@ rl.on('line', function(line){
 
 	console.log('reading file ' + line);
 
+	var readStream = fs.createReadStream(line);
+
+	var httpClientOptions = {
+			host : 'localhost',
+			port : 4000,
+			method : 'POST',
+			path : '/sampleData/' + line
+		};
+
+
+	var req = http.request(httpClientOptions, function(res){
+			console.log(res.statusCode + ' ' + JSON.stringify(res.headers));
+		}).on('error', function(e) {
+			console.log("Got error: " + e.message);
+		});
+
+	readStream.pipe(req);
+/*
+
 	
 	fs.open(line, 'r', function(err, fd){
 
@@ -26,10 +45,7 @@ rl.on('line', function(line){
 			host : 'localhost',
 			port : 4000,
 			method : 'POST',
-			path : '/sampleData/' + line/*,
-			headers : {
-				'Transfer-Encoding' : 'chunked'
-			}*/
+			path : '/sampleData/' + line
 		};
 
 		fs.fstat(fd, function(err, stat){
@@ -75,6 +91,7 @@ rl.on('line', function(line){
 			})();
 		});
 	});
+*/
 	rl.prompt();
 }).on('close', function(){
 	console.log('KTHXBYE');
