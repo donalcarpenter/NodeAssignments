@@ -7,9 +7,7 @@ client.on('data', function(data){
 });
 
 
-
 var readline = require('readline');
-
 var userid;
 
 rl = readline.createInterface(process.stdin, process.stdout);
@@ -36,7 +34,7 @@ rl.on('line', function(line){
 		operation.action = "chat";
 		operation.data = line; 
 	}
-	
+
 	client.write(JSON.stringify(operation));
 
 	rl.prompt();
